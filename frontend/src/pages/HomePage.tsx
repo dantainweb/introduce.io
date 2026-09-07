@@ -17,8 +17,8 @@ export default function HomePage() {
 
   return (
     <div className="page">
-      <h1>GodWord</h1>
-      <p className="subtitle">前後端分離 Monorepo 架構</p>
+      <h1>Jen Chieh's home page</h1>
+      <p className="subtitle">採用前後端分離 Monorepo 架構</p>
 
       <section className="card">
         <h2>Examples (來自後端 API)</h2>

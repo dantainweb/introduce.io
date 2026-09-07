@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   --color-bg: #0f0f13;
   --color-surface: #1a1a24;
   --color-border: #2a2a3a;
   --color-primary: #6c63ff;
   --color-primary-hover: #7b73ff;
+  --color-primary-glow: rgba(108, 99, 255, 0.15);
   --color-text: #e4e4ed;
   --color-text-muted: #8888a0;
   --color-error: #ff6b6b;
   --radius: 12px;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --nav-height: 64px;
 }
 
 * {
@@ -25,10 +29,83 @@ body {
   line-height: 1.6;
 }
 
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ─── Navbar ─── */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 15, 19, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  height: var(--nav-height);
+}
+
+.navbar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-primary), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+  background: var(--color-primary-glow);
+}
+
+.nav-link.active {
+  color: var(--color-primary);
+  background: var(--color-primary-glow);
+}
+
+/* ─── Page Layout ─── */
+
 .page {
   max-width: 960px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem 4rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
@@ -46,12 +123,15 @@ h1 {
   font-size: 1.1rem;
 }
 
+/* ─── Card ─── */
+
 .card {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: 2rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .card h2 {
@@ -59,6 +139,173 @@ h1 {
   margin-bottom: 1rem;
   color: var(--color-text);
 }
+
+/* ─── About Page ─── */
+
+.about-card {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.about-role {
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.about-bio {
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--color-primary-glow);
+  color: var(--color-primary);
+  border: 1px solid rgba(108, 99, 255, 0.25);
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.contact-label {
+  width: 80px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Works Page ─── */
+
+.works-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.work-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.work-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 20px var(--color-primary-glow);
+  transform: translateY(-2px);
+  color: inherit;
+}
+
+.work-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.work-icon {
+  font-size: 1.5rem;
+}
+
+.work-card-header h2 {
+  margin-bottom: 0;
+}
+
+.work-description {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.work-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+/* ─── Work Detail Page ─── */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--color-primary);
+}
+
+.work-content {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text);
+}
+
+.feature-icon {
+  color: var(--color-primary);
+  font-size: 0.85rem;
+}
+
+/* ─── Table ─── */
 
 table {
   width: 100%;
@@ -91,4 +338,35 @@ tbody tr:hover {
 
 .error {
   color: var(--color-error);
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-tags {
+    justify-content: center;
+  }
+
+  .navbar-inner {
+    padding: 0 1rem;
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.85rem;
+  }
+
+  .page {
+    padding: 2rem 1rem 3rem;
+  }
 }
